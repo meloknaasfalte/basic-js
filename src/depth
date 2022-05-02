@@ -1,0 +1,15 @@
+function calculateDepth(arr) {
+
+    let count = 1;
+    
+    arr.forEach(element => {
+
+      if (Array.isArray(element)){
+        count++;
+        calculateDepth(element);
+      }
+    })
+    return count;
+  }
+
+console.log(calculateDepth([1, 2, 3, [1], 4, 5, [1]]));
