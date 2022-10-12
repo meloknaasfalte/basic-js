@@ -32,8 +32,6 @@ function minesweeper(matrix) {
   // remove line with error and write your code here
 }
 
-console.log(minesweeper(matrix));
-
 
 module.exports = {
   minesweeper
