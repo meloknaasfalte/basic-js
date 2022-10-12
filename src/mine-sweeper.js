@@ -28,14 +28,8 @@ const { NotImplementedError } = require('../extensions/index.js');
 
 // }
 function minesweeper(matrix) {
-  
-}
 
-let matrix = [
-  [true, false, false],
-  [false, true, false],
-  [false, false, false]
-]
+}
 
 console.log(minesweeper(matrix));
 

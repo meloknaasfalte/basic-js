@@ -6,9 +6,11 @@ function calculateDepth(arr) {
 
       if (Array.isArray(element)){
         count++;
-        calculateDepth(element);
+        this.calculateDepth(element);
       }
+      
     })
+    // console.log(depth);
     return count;
   }
 
