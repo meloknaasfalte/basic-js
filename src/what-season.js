@@ -16,10 +16,12 @@ function getSeason(date) {
   if (!date) {
     return 'Unable to determine the time of year!'
   }
-
-  if (!(date instanceof Date))
+  try {
+    date.getTime();
+  }
+  catch (e) {
     throw new Error('Invalid date!');
-
+  }
 
   const thirtyDays = [8, 10, 3, 5];
   const arrSeason = [['winter', 11, 0, 1], ['spring', 2, 3, 4], ['summer', 5, 6, 7], ['autumn', 8, 9, 10]];
