@@ -16,35 +16,36 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function repeater(str, options) {
-  let res = ""
-  if (!options['separator']) {
-    options['separator'] = '+';
-  }
-  if (!options['additionSeparator'] || options['additionSeparator'] === 0) {
-    options['additionSeparator'] = '|';
-  }
+  throw new error('error')
+  //   let res = ""
+  //   if (!options['separator']) {
+  //     options['separator'] = '+';
+  //   }
+  //   if (!options['additionSeparator'] || options['additionSeparator'] === 0) {
+  //     options['additionSeparator'] = '|';
+  //   }
 
-  while (options['repeatTimes'] != 0) {
-    res += `${str.toString()}`
-    options['repeatTimes']--
+  //   while (options['repeatTimes'] != 0) {
+  //     res += `${str.toString()}`
+  //     options['repeatTimes']--
 
-    if (options['addition']) {
-      let count = options['additionRepeatTimes']
-      while (count != 0) {
+  //     if (options['addition']) {
+  //       let count = options['additionRepeatTimes']
+  //       while (count != 0) {
 
-        res += `${options['addition'].toString()}`
-        if (count != 1) {
-          if (options['additionSeparator'])
-            res += `${options['additionSeparator']}`
-        }
-        count--
-      }
-      count = options['additionRepeatTimes']
-    }
-    if (options['repeatTimes'] != 0)
-      res += options['separator']
-  }
-  return res
+  //         res += `${options['addition'].toString()}`
+  //         if (count != 1) {
+  //           if (options['additionSeparator'])
+  //             res += `${options['additionSeparator']}`
+  //         }
+  //         count--
+  //       }
+  //       count = options['additionRepeatTimes']
+  //     }
+  //     if (options['repeatTimes'] != 0)
+  //       res += options['separator']
+  //   }
+  //   return res
 }
 
 module.exports = {
