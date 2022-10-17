@@ -16,36 +16,46 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function repeater(str, options) {
-  throw new error('error')
-  //   let res = ""
-  //   if (!options['separator']) {
-  //     options['separator'] = '+';
-  //   }
-  //   if (!options['additionSeparator'] || options['additionSeparator'] === 0) {
-  //     options['additionSeparator'] = '|';
-  //   }
+  let res = ""
+  let count = 0
+  if (!options['separator'])
+    if (!options['separator']) {
+      options['separator'] = '+';
+    }
+  if (!options['additionSeparator']) {
+    options['additionSeparator'] = '|';
+  }
 
-  //   while (options['repeatTimes'] != 0) {
-  //     res += `${str.toString()}`
-  //     options['repeatTimes']--
+  if (!options['repeatTimes']) {
+    options['repeatTimes'] = 1
+  }
+  while (options['repeatTimes'] != 0) {
+    res += `${String(str)}`
+    options['repeatTimes']--
 
-  //     if (options['addition']) {
-  //       let count = options['additionRepeatTimes']
-  //       while (count != 0) {
+    if (options['addition'] || String(options['addition']) === 'false' || String(options['addition']) === 'null') {
+      if (options['additionRepeatTimes']) {
 
-  //         res += `${options['addition'].toString()}`
-  //         if (count != 1) {
-  //           if (options['additionSeparator'])
-  //             res += `${options['additionSeparator']}`
-  //         }
-  //         count--
-  //       }
-  //       count = options['additionRepeatTimes']
-  //     }
-  //     if (options['repeatTimes'] != 0)
-  //       res += options['separator']
-  //   }
-  //   return res
+        count = options['additionRepeatTimes']
+      }
+      else
+        count = 1
+
+      while (count != 0) {
+
+        res += `${String(options['addition'])}`
+        if (count != 1) {
+          if (options['additionSeparator'])
+            res += `${options['additionSeparator']}`
+        }
+        count--
+      }
+      count = options['additionRepeatTimes']
+    }
+    if (options['repeatTimes'] != 0)
+      res += options['separator']
+  }
+  return res
 }
 
 module.exports = {

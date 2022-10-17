@@ -15,21 +15,20 @@ function encodeLine(str) {
   let res = "";
   let count = 1;
 
-  for (let i = 0; i <str.length; i++){
-    
+  for (let i = 0; i < str.length; i++) {
 
     if (str[i] === str[i + 1])
       count++;
-    else{
-      if (count != 1){
+    else {
+      if (count != 1) {
         res += String(count) + str[i];
         count = 1;
       }
       else
-        res += str[i];   
+        res += str[i];
     }
   }
-  return res; 
+  return res;
 }
 
 module.exports = {

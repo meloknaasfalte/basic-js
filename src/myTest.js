@@ -1,25 +1,33 @@
 
 function repeater(str, options) {
     let res = ""
+    let count = 0
+    if (!options['separator'])
+        if (!options['separator']) {
+            options['separator'] = '+';
+        }
+    if (!options['additionSeparator']) {
+        options['additionSeparator'] = '|';
+    }
 
-    // if (!options['separator'])
-    //     if (!options['separator']) {
-    //         options['separator'] = '+';
-    //     }
-    // if (!options['additionSeparator']) {
-    //     options['additionSeparator'] = '|';
-    // }
-    console.log(options['repeatTimes']);
+    if (!options['repeatTimes']) {
+        options['repeatTimes'] = 1
+    }
     while (options['repeatTimes'] != 0) {
-        res += `${str.toString()}`
+        res += `${String(str)}`
         options['repeatTimes']--
 
-
         if (options['addition']) {
-            let count = options['additionRepeatTimes']
-            while (count != 0) {
+            if (options['additionRepeatTimes']) {
 
-                res += `${options['addition'].toString()}`
+                count = options['additionRepeatTimes']
+            }
+            else
+                count = 1
+
+            while (count != 0) {
+                console.log(`${String(options['addition'])}`);
+                res += `${String(options['addition'])}`
                 if (count != 1) {
                     if (options['additionSeparator'])
                         res += `${options['additionSeparator']}`
@@ -31,23 +39,24 @@ function repeater(str, options) {
         if (options['repeatTimes'] != 0)
             res += options['separator']
     }
-
-
-
     return res
 }
 
-let resStr = repeater(repeater('аГуСиК ', { repeatTimes: 3, separator: '♥♥♥  ', addition: ' пОкАкУнЬкАл ', additionRepeatTimes: 5, additionSeparator: '( ͡° ͜ʖ ͡°)' }))
-console.log(resStr);
+const objWithSpecificCoercion = {
+    [Symbol.toPrimitive]: hint => hint !== 'number' ? 'STRING_OR_DEFAULT' : 'NUMBER'
+};
+
+let resStr = repeater(objWithSpecificCoercion, { repeatTimes: 2, addition: objWithSpecificCoercion })
 // let testObj = repeater('test', { repeatTimes: 2, , addition: 'R4DNdSC4cm', additionRepeatTimes: 1, additionSeparator: 'xdakNlYerD' })
+console.log(resStr);
 
 
-let test = 'аГуСиК  пОкАкУнЬкАл ( ͡° ͜ʖ ͡°) пОкАкУнЬкАл ( ͡° ͜ʖ ͡°) пОкАкУнЬкАл ( ͡° ͜ʖ ͡°) пОкАкУнЬкАл ( ͡° ͜ʖ ͡°) пОкАкУнЬкАл ♥♥♥  аГуСиК  пОкАкУнЬкАл ( ͡° ͜ʖ ͡°) пОкАкУнЬкАл ( ͡° ͜ʖ ͡°) пОкАкУнЬкАл ( ͡° ͜ʖ ͡°) пОкАкУнЬкАл ( ͡° ͜ʖ ͡°) пОкАкУнЬкАл ♥♥♥  аГуСиК  пОкАкУнЬкАл ( ͡° ͜ʖ ͡°) пОкАкУнЬкАл ( ͡° ͜ʖ ͡°) пОкАкУнЬкАл ( ͡° ͜ʖ ͡°) пОкАкУнЬкАл ( ͡° ͜ʖ ͡°) пОкАкУнЬкАл '
+
+let test = 'STRING_OR_DEFAULTSTRING_OR_DEFAULT+STRING_OR_DEFAULTSTRING_OR_DEFAULT'
 if (resStr === test)
     console.log(true);
 else
     console.log(false);
-// console.log(repeater('NtXzB8rjNX', { repeatTimes: 6, separator: 'QCe2UgFvRH', addition: 'R4DNdSC4cm', additionRepeatTimes: 1, additionSeparator: 'xdakNlYerD' }), 'after transform')
 
 
 let obj = {
@@ -55,6 +64,30 @@ let obj = {
     aple: 1,
     orange: 1
 }
+
+let someStr = `${obj.test}`
+
+// class DepthCalculator {
+
+//     calculateDepth(arr) {
+//         this.count = 1
+//         this.depth = 1
+//         for (let i = 0; i < arr.length; i++) {
+//             if (Array.isArray(arr[i])) {
+//                 this.depth++
+//                 this.count++
+//                 this.count += this.calculateDepth(arr[i]);
+//             }
+//         }
+//         if (this.depth > this.count)
+//             this.count = this.depth
+//         return this.count;
+//     }
+// }
+
+// let calculator = new DepthCalculator
+
+// console.log(calculator.calculateDepth([1, 2, [], [[]]]));
 
 
 
