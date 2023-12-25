@@ -42,7 +42,6 @@ function repeater(str, options) {
         count = 1
 
       while (count != 0) {
-
         res += `${String(options['addition'])}`
         if (count != 1) {
           if (options['additionSeparator'])

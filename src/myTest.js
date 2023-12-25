@@ -1,98 +1,90 @@
+// Meet me in the park at eleven am
 
-function repeater(str, options) {
-    let res = ""
-    let count = 0
-    if (!options['separator'])
-        if (!options['separator']) {
-            options['separator'] = '+';
+const str = 'Meet me in the park at eleven am';
+
+console.log(str.replace(/ /gi, '').length);
+
+
+class VigenereCipheringMachine {
+
+    constructor(isReverse) {
+        this.isReverse = true
+        if (isReverse === false) {
+            this.isReverse = false;
         }
-    if (!options['additionSeparator']) {
-        options['additionSeparator'] = '|';
     }
 
-    if (!options['repeatTimes']) {
-        options['repeatTimes'] = 1
-    }
-    while (options['repeatTimes'] != 0) {
-        res += `${String(str)}`
-        options['repeatTimes']--
+    getKey(str, key) {
+        let keyArr = [];
+        keyArr = key.split("");
+        if (str.length == keyArr.length)
+            return keyArr.join("");
 
-        if (options['addition']) {
-            if (options['additionRepeatTimes']) {
+        const keyArrLength = keyArr.length;
+        for (let i = 0; i < (str.length - keyArrLength); i++) {
 
-                count = options['additionRepeatTimes']
-            }
-            else
-                count = 1
-
-            while (count != 0) {
-                console.log(`${String(options['addition'])}`);
-                res += `${String(options['addition'])}`
-                if (count != 1) {
-                    if (options['additionSeparator'])
-                        res += `${options['additionSeparator']}`
-                }
-                count--
-            }
-            count = options['additionRepeatTimes']
+            keyArr.push(keyArr[i % ((keyArr).length)])
         }
-        if (options['repeatTimes'] != 0)
-            res += options['separator']
+
+        return keyArr.join("");
     }
-    return res
+
+    encrypt(str, key) {
+        if (!str || !key) {
+            console.log(str, key);
+            throw new Error(false);
+        }
+        let res = "";
+        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        let keyStr = this.getKey(str, key);
+        let j = 0;
+        for (let i = 0; i < str.length; i += 1) {
+            if (alphabet.includes(str[i].toUpperCase())) {
+                const x = (alphabet.indexOf(str[i].toUpperCase()) +
+                    alphabet.indexOf(keyStr[j].toUpperCase())) % 26;
+                res += alphabet[x];
+                j += 1;
+                continue;
+            }
+            res += str[i];
+        }
+        if (this.isReverse) {
+            return res;
+        }
+        return res.split('').reverse().join('');
+    }
+
+    decrypt(str, key) {
+        if (!str || !key) {
+            throw new Error(false);
+        }
+        let res = "";
+        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        let keyStr = this.getKey(str, key);
+        let j = 0;
+        for (let i = 0; i < str.length; i += 1) {
+            if (alphabet.includes(str[i].toUpperCase())) {
+                const x = (alphabet.indexOf(str[i].toUpperCase()) -
+                    alphabet.indexOf(keyStr[j].toUpperCase()) + 26) % 26;
+                res += alphabet[x];
+                j += 1;
+                continue;
+            }
+            res += str[i];
+        }
+        if (this.isReverse) {
+            return res;
+        }
+        return res.split('').reverse().join('');
+    }
 }
 
-const objWithSpecificCoercion = {
-    [Symbol.toPrimitive]: hint => hint !== 'number' ? 'STRING_OR_DEFAULT' : 'NUMBER'
-};
+const machine = new VigenereCipheringMachine();
+const reverseMachine = new VigenereCipheringMachine(false);
 
-let resStr = repeater(objWithSpecificCoercion, { repeatTimes: 2, addition: objWithSpecificCoercion })
-// let testObj = repeater('test', { repeatTimes: 2, , addition: 'R4DNdSC4cm', additionRepeatTimes: 1, additionSeparator: 'xdakNlYerD' })
-console.log(resStr);
+// console.log(machine.encrypt(undefined, undefined));
 
+// e = 5; l = 12; t = 20
 
-
-let test = 'STRING_OR_DEFAULTSTRING_OR_DEFAULT+STRING_OR_DEFAULTSTRING_OR_DEFAULT'
-if (resStr === test)
-    console.log(true);
-else
-    console.log(false);
-
-
-let obj = {
-    test: 1,
-    aple: 1,
-    orange: 1
-}
-
-let someStr = `${obj.test}`
-
-// class DepthCalculator {
-
-//     calculateDepth(arr) {
-//         this.count = 1
-//         this.depth = 1
-//         for (let i = 0; i < arr.length; i++) {
-//             if (Array.isArray(arr[i])) {
-//                 this.depth++
-//                 this.count++
-//                 this.count += this.calculateDepth(arr[i]);
-//             }
-//         }
-//         if (this.depth > this.count)
-//             this.count = this.depth
-//         return this.count;
-//     }
-// }
-
-// let calculator = new DepthCalculator
-
-// console.log(calculator.calculateDepth([1, 2, [], [[]]]));
-
-
-
-
-
-
-
+console.log(undefined.valuef());
 
